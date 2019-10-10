@@ -6,7 +6,7 @@ const deps = {
   [projectType.MINIMAL_CONTROLLER]: [
     '@tiejs/controller@latest',
     '@tiejs/core@latest',
-    'tiec-cli@latest',
+    'tie-cli@latest',
   ],
 
   [projectType.MINIMAL_GRAPHQL]: [
