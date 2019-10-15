@@ -29,6 +29,14 @@ const deps = {
     '@tiejs/graphql@latest',
     'tie-cli@latest',
   ],
+
+  [projectType.EXAMPLE_TYPEORM]: [
+    '@tiejs/common@latest',
+    '@tiejs/controller@latest',
+    '@tiejs/core@latest',
+    "@tiejs/typeorm@latest",
+    'tie-cli@latest',
+  ],
 }
 
 type Type =
@@ -36,6 +44,7 @@ type Type =
   | projectType.MINIMAL_GRAPHQL
   | projectType.SIMPLE_CONTROLLER
   | projectType.SIMPLE_GRAPHQL
+  | projectType.EXAMPLE_TYPEORM
 
 export function install(root: string, type: Type) {
   const command = 'npm'

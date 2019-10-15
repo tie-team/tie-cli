@@ -12,6 +12,7 @@ export async function getProjectType() {
         projectType.MINIMAL_GRAPHQL,
         projectType.SIMPLE_CONTROLLER,
         projectType.SIMPLE_GRAPHQL,
+        projectType.EXAMPLE_TYPEORM,
       ],
     },
   ])
