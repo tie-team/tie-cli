@@ -13,13 +13,13 @@ import { createPkg } from '../utils/new/createPkg'
 
 const { green, yellow } = chalk
 
-class CreateTieApp extends Command {
+class Create extends Command {
   static description = 'Init a new Tie project'
 
   static args = [{ name: 'appName' }]
 
   async run() {
-    const { args } = this.parse(CreateTieApp)
+    const { args } = this.parse(Create)
     const templateDir = path.join(__dirname, '..', '..', 'templates')
     const appName: string = args.appName
     if (!appName) {
@@ -48,4 +48,4 @@ class CreateTieApp extends Command {
   }
 }
 
-export = CreateTieApp
+export = Create

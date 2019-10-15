@@ -4,7 +4,7 @@ import spawn from 'cross-spawn'
 import { removeSync } from 'fs-extra'
 import { existsSync } from 'fs'
 import ora from 'ora'
-import { tmpAppPath, localAppPath, tmpDir } from '../utils/paths'
+import { tmpAppPath, localAppPath } from '../utils/paths'
 
 function getCommand() {
   const cwd = process.cwd()
@@ -16,6 +16,7 @@ function getCommand() {
     return join(baseDir, 'node_modules', '.bin', 'tsc')
   }
 }
+
 
 // TODO:
 function createAppFile(appPath: string, distDir: string) {
@@ -49,13 +50,13 @@ export default class Build extends Command {
     const tsconfigPath = join(cwd, 'tsconfig.json')
     const startArgs: string[] = ['--project', tsconfigPath]
     const appPath = existsSync(localAppPath) ? localAppPath : tmpAppPath
-    const distDir = join(cwd, 'dist')
+    const buildDir = join(cwd, 'build')
 
     const spinner = ora('Tie building...').start()
 
-    removeSync(distDir)
+    removeSync(buildDir)
 
-    createAppFile(appPath, distDir)
+    createAppFile(appPath, buildDir)
     spawn.sync(command, startArgs, { stdio: 'inherit' })
     spinner.succeed('Tie build successfully')
   }

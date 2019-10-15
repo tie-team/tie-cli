@@ -10,20 +10,25 @@ npm i -g tie-cli
 
 ## Command
 
-### `tie new`
+### `tie create`
 
-Init a new Tie project.
+创建一个新的 Tie 项目
 
 ### `tie dev`
 
-Runs the app in development mode.
+以开发模式启动项目
 
-Open http://localhost:5001 to view it in the browser.
+启动成功后访问： http://localhost:5001
 
 ### `tie test`
 
-Runs the test watcher in an interactive mode.
+运行单元测试
 
 ### `tie build`
 
-Builds the app for production to the build folder.
+构建可部署的版本到 `build` 文件夹
+
+构建成功后，以生产模式启动项目：`NODE_ENV=production node build/app.js`
+
+
+
