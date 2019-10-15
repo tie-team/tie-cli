@@ -61,7 +61,8 @@
     "/lib",
     "/config",
     "/npm-shrinkwrap.json",
-    "/oclif.manifest.json"
+    "/oclif.manifest.json",
+    "/templates"
   ],
   "homepage": "https://github.com/tie-team/tie-cli",
   "keywords": [
