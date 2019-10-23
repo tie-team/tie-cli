@@ -1,55 +1,11 @@
 import spawn from 'cross-spawn'
 import path from 'path'
-import { projectType } from './projectType.enum'
+import { templates } from './templates'
 
-const deps = {
-  [projectType.MINIMAL_CONTROLLER]: [
-    '@tiejs/controller@latest',
-    '@tiejs/core@latest',
-    'tie-cli@latest',
-  ],
-
-  [projectType.MINIMAL_GRAPHQL]: [
-    '@tiejs/common@latest',
-    '@tiejs/core@latest',
-    '@tiejs/graphql@latest',
-    'tie-cli@latest',
-  ],
-  [projectType.SIMPLE_CONTROLLER]: [
-    '@tiejs/common@latest',
-    '@tiejs/controller@latest',
-    '@tiejs/core@latest',
-    '@tiejs/graphql@latest',
-    'tie-cli@latest',
-  ],
-  [projectType.SIMPLE_GRAPHQL]: [
-    '@tiejs/common@latest',
-    '@tiejs/controller@latest',
-    '@tiejs/core@latest',
-    '@tiejs/graphql@latest',
-    'tie-cli@latest',
-  ],
-
-  [projectType.EXAMPLE_TYPEORM]: [
-    '@tiejs/common@latest',
-    '@tiejs/controller@latest',
-    '@tiejs/core@latest',
-    "@tiejs/typeorm@latest",
-    'tie-cli@latest',
-  ],
-}
-
-type Type =
-  | projectType.MINIMAL_CONTROLLER
-  | projectType.MINIMAL_GRAPHQL
-  | projectType.SIMPLE_CONTROLLER
-  | projectType.SIMPLE_GRAPHQL
-  | projectType.EXAMPLE_TYPEORM
-
-export function install(root: string, type: Type) {
+export function install(root: string, type: string) {
   const command = 'npm'
   process.chdir(root)
-  const args: string[] = ['i', ...deps[type]]
+  const args: string[] = ['i', ...templates[type]]
 
   const child = spawn(command, args, { stdio: 'inherit' })
 

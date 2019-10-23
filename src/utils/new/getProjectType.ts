@@ -1,5 +1,5 @@
 import inquirer from 'inquirer'
-import { projectType } from './projectType.enum'
+import { templates } from '../new/templates'
 
 export async function getProjectType() {
   const answer: any = await inquirer.prompt([
@@ -7,13 +7,7 @@ export async function getProjectType() {
       type: 'list',
       name: 'projectType',
       message: '选择项目模板？',
-      choices: [
-        projectType.MINIMAL_CONTROLLER,
-        projectType.MINIMAL_GRAPHQL,
-        projectType.SIMPLE_CONTROLLER,
-        projectType.SIMPLE_GRAPHQL,
-        projectType.EXAMPLE_TYPEORM,
-      ],
+      choices: Object.keys(templates),
     },
   ])
   return answer.projectType
