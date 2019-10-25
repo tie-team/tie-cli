@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/tie-team/tie-cli/compare/v0.0.3...v0.0.5) (2019-10-25)
+
+
+### Features
+
+* add build command ([69fc7fa](https://github.com/tie-team/tie-cli/commit/69fc7fa))
+* add mongo example ([6c91063](https://github.com/tie-team/tie-cli/commit/6c91063))
+* add typeorm example template ([e5f8fbe](https://github.com/tie-team/tie-cli/commit/e5f8fbe))
+
 ### [0.0.4](https://github.com/tie-team/tie-cli/compare/v0.0.3...v0.0.4) (2019-10-15)
 
 
