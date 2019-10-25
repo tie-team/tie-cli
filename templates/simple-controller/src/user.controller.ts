@@ -7,6 +7,15 @@ import { CreateUserInput } from './createUser.input'
 export class UserController {
   constructor(private userService: UserService) {}
 
+  @Get('/')
+  index() {
+    return {
+      'GET users': 'http://127.0.0.1:5001/users',
+      'GET users/Jack': 'http://127.0.0.1:5001/users/Jack',
+      'POST users': 'http://127.0.0.1:5001/users',
+    }
+  }
+
   @Get('/users/:name')
   async user(@Params('name') name: string): Promise<User> {
     return await this.userService.getUser(name)
