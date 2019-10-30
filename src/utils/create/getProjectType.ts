@@ -1,5 +1,5 @@
 import inquirer from 'inquirer'
-import { templates } from '../new/templates'
+import { templates } from './templates'
 
 export async function getProjectType() {
   const answer: any = await inquirer.prompt([

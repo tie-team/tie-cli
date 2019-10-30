@@ -1,15 +1,15 @@
-import { Command, flags } from '@oclif/command'
+import { Command } from '@oclif/command'
 import chalk from 'chalk'
 import path, { join } from 'path'
 import yosay from 'yosay'
 import fs from 'fs-extra'
 
-import { checkAppDir } from '../utils/new/checkAppDir'
-import { createAppDir } from '../utils/new/createAppDir'
-import { getProjectType } from '../utils/new/getProjectType'
-import { install } from '../utils/new/install'
-import { showTips } from '../utils/new/showTips'
-import { createPkg } from '../utils/new/createPkg'
+import { checkAppDir } from '../utils/create/checkAppDir'
+import { createAppDir } from '../utils/create/createAppDir'
+import { getProjectType } from '../utils/create/getProjectType'
+import { install } from '../utils/create/install'
+import { showTips } from '../utils/create/showTips'
+import { createPkg } from '../utils/create/createPkg'
 
 const { green, yellow } = chalk
 
