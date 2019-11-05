@@ -1,6 +1,6 @@
 {
   "name": "tie-cli",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "CLI tool for Tie",
   "author": "forsigner @forsigner",
   "bin": {
