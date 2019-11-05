@@ -1,5 +1,6 @@
 export const APP_CODE = `
-import { Tie } from '@tiejs/core'
+import { Appliaction } from '@tiejs/core'
+const app = new Appliaction()
 
-Tie.bootstrap()
+app.bootstrap()
 `
