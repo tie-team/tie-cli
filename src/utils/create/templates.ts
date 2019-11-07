@@ -19,4 +19,6 @@ export const templates: any = {
   ],
 
   'example-mvc': ['@tiejs/core@latest', 'tie-cli@latest'],
+
+  'example-graphql-subscription': ['@tiejs/core@latest', 'tie-cli@latest'],
 }
