@@ -1,11 +1,10 @@
 import { Command } from '@oclif/command'
 import spawn from 'cross-spawn'
 import { join } from 'path'
-import { existsSync, removeSync } from 'fs-extra'
 
-import { createAppFile } from '../utils/createAppFile'
 import { getCommand } from '../utils/getCommand'
-import { tmpAppPath, localAppPath, tmpDir } from '../utils/paths'
+import { appPath } from '../utils/paths'
+import { cleanJsFile } from '../utils/cleanJsFile'
 
 export default class Dev extends Command {
   static description = 'Runs the app in development mode'
@@ -20,7 +19,6 @@ export default class Dev extends Command {
     const tsconfigPathsString = tsconfig.compilerOptions.baseUrl
       ? '-r tsconfig-paths/register'
       : ''
-    const appPath = existsSync(localAppPath) ? localAppPath : tmpAppPath
     const exec = `ts-node ${tsconfigPathsString} --project ${tsconfigPath} ${appPath}`
 
     // TODO: 需要完善
@@ -35,8 +33,7 @@ export default class Dev extends Command {
       exec,
     ]
 
-    if (existsSync(tmpDir)) removeSync(tmpDir)
-    if (!existsSync(localAppPath)) createAppFile()
+    cleanJsFile(cwd)
 
     const child = spawn(command, startArgs, { stdio: 'inherit' })
 
