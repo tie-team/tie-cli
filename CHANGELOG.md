@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.4](https://github.com/tie-team/tie-cli/compare/v0.1.3...v0.1.4) (2020-05-20)
+
+
+### Features
+
+* improve mongo template ([c30f06d](https://github.com/tie-team/tie-cli/commit/c30f06d0ce21a7340765245171adc988b504054b))
+* improve typeorm template ([ebfb3fd](https://github.com/tie-team/tie-cli/commit/ebfb3fd8ad78ab06f0bd1c804493ddf4e24bc5a1))
+
 ### [0.1.3](https://github.com/tie-team/tie-cli/compare/v0.1.2...v0.1.3) (2020-05-20)
 
 
