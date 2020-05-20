@@ -1,4 +1,8 @@
 import { Appliaction } from '@tiejs/core'
-const app = new Appliaction()
+import { MessageResolver } from './message.resolver'
+
+const app = new Appliaction({
+  resolvers: [MessageResolver],
+})
 
 app.bootstrap()

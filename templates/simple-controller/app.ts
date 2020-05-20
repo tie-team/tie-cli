@@ -1,4 +1,8 @@
 import { Appliaction } from '@tiejs/core'
-const app = new Appliaction()
+import { UserController } from './user.controller'
+
+const app = new Appliaction({
+  controllers: [UserController],
+})
 
 app.bootstrap()

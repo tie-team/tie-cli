@@ -5,8 +5,6 @@ export class HomeController {
   @Get('/')
   @Render('index')
   index() {
-    return {
-      foo: 'bar',
-    }
+    return { foo: 'bar' }
   }
 }
