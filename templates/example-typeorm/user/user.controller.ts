@@ -13,5 +13,4 @@ export class UserController {
   async users() {
     return await this.userService.queryUser()
   }
-
 }

@@ -1,14 +1,11 @@
 import { Injectable } from '@tiejs/common'
-import { InjectRepository } from '@tiejs/typeorm'
-import { Repository } from 'typeorm'
+import { Repository, EntityRepository } from 'typeorm'
 import { User } from './user.entity'
 
 @Injectable()
-export class UserRepository {
-  @InjectRepository(User)
-  private userRepository: Repository<User>
-
-  async findAll(): Promise<User[]> {
-    return await this.userRepository.find()
+@EntityRepository(User)
+export class UserRepository extends Repository<User> {
+  findAll(): Promise<User[]> {
+    return this.find()
   }
 }
