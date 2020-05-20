@@ -5,6 +5,8 @@ export const templates: any = {
   'simple-controller': ['@tiejs/core@latest', 'tie-cli@latest'],
   'simple-graphql': ['@tiejs/core@latest', 'tie-cli@latest'],
 
+  'example-mvc': ['@tiejs/core@latest', 'tie-cli@latest'],
+
   'example-typeorm': [
     '@tiejs/core@latest',
     '@tiejs/typeorm@latest',
@@ -17,8 +19,6 @@ export const templates: any = {
     'mongodb@latest',
     'tie-cli@latest',
   ],
-
-  'example-mvc': ['@tiejs/core@latest', 'tie-cli@latest'],
 
   'example-graphql-subscription': ['@tiejs/core@latest', 'tie-cli@latest'],
 }
