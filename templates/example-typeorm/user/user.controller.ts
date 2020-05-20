@@ -2,7 +2,7 @@ import { Controller, Get } from '@tiejs/controller'
 import { UserService } from './user.service'
 
 @Controller()
-export class HomeController {
+export class UserController {
   constructor(private userService: UserService) {}
   @Get('/')
   index() {
