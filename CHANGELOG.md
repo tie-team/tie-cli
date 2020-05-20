@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.3](https://github.com/tie-team/tie-cli/compare/v0.1.2...v0.1.3) (2020-05-20)
+
+
+### Features
+
+* update typeorm example ([dd5212e](https://github.com/tie-team/tie-cli/commit/dd5212ebf589cac97f1cadfb1ae8591e673322f8))
+* 更新 templates ([b8ac0ca](https://github.com/tie-team/tie-cli/commit/b8ac0cacf8ffa2ee88eb42d8402ac6fb6e11019a))
+
 ### [0.1.2](https://github.com/tie-team/tie-cli/compare/v0.1.1...v0.1.2) (2020-02-27)
 
 
