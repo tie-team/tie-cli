@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.5](https://github.com/tie-team/tie-cli/compare/v0.1.4...v0.1.5) (2020-05-21)
+
+
+### Bug Fixes
+
+* typo fix ([c66ed2b](https://github.com/tie-team/tie-cli/commit/c66ed2b13889fbb1e48f80285adeaa0a08dc2f3e))
+
 ### [0.1.4](https://github.com/tie-team/tie-cli/compare/v0.1.3...v0.1.4) (2020-05-20)
 
 
