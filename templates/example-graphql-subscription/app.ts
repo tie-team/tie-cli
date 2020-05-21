@@ -1,7 +1,7 @@
-import { Appliaction } from '@tiejs/core'
+import { Application } from '@tiejs/core'
 import { MessageResolver } from './message.resolver'
 
-const app = new Appliaction({
+const app = new Application({
   resolvers: [MessageResolver],
 })
 

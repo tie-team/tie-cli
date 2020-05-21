@@ -1,6 +1,6 @@
 export const APP_CODE = `
-import { Appliaction } from '@tiejs/core'
-const app = new Appliaction()
+import { Application } from '@tiejs/core'
+const app = new Application()
 
 app.bootstrap()
 `

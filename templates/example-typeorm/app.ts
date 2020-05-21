@@ -1,9 +1,9 @@
-import { Appliaction } from '@tiejs/core'
+import { Application } from '@tiejs/core'
 import { UserController } from './user/user.controller'
 import { User } from './user/user.entity'
 import { UserResolver } from './user/user.resolver'
 
-const app = new Appliaction({
+const app = new Application({
   typeorm: {
     type: 'mysql',
     host: 'localhost',

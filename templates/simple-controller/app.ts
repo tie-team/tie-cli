@@ -1,7 +1,7 @@
-import { Appliaction } from '@tiejs/core'
+import { Application } from '@tiejs/core'
 import { UserController } from './user.controller'
 
-const app = new Appliaction({
+const app = new Application({
   controllers: [UserController],
 })
 
