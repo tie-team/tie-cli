@@ -1,4 +1,4 @@
-import { Command } from '@oclif/command'
+import { Command, flags } from '@oclif/command'
 import spawn from 'cross-spawn'
 import { join, resolve } from 'path'
 
@@ -15,30 +15,24 @@ export default class Dev extends Command {
   static description = 'Runs the app in development mode'
 
   static examples = ['$ tie dev']
-  static args = [{ name: 'serverPath' }]
 
-  async run() {
-    const { args } = this.parse(Dev)
-    const serverPath: string = args.serverPath
+  static flags = {
+    webpack: flags.boolean({ char: 'w' }),
+    main: flags.string({ char: 'm' }),
+  }
+
+  private cwd = process.cwd()
+  private entry: string = ''
+  private tsconfigPath = join(this.cwd, 'tsconfig.json')
+  private tsconfig = require(this.tsconfigPath)
+  private tsconfigPathsString = this.tsconfig.compilerOptions.baseUrl
+    ? '-r tsconfig-paths/register'
+    : ''
+
+  private useTsNode() {
     const cwd = process.cwd()
-    const command = getCommand()
-    const tsconfigPath = join(cwd, 'tsconfig.json')
-    const tsconfig = require(tsconfigPath)
-    const tsconfigPathsString = tsconfig.compilerOptions.baseUrl
-      ? '-r tsconfig-paths/register'
-      : ''
 
-    const entry = serverPath ? resolve(cwd, serverPath) : appPath
-
-    await Promise.all([
-      genControllers(),
-      genResolvers(),
-      genPluginsConfig(),
-      genConfig(),
-      genApp(),
-    ])
-
-    const exec = `ts-node ${tsconfigPathsString} --project ${tsconfigPath} ${entry}`
+    const exec = `ts-node ${this.tsconfigPathsString} --project ${this.tsconfigPath} ${this.entry}`
 
     // TODO: 需要完善
     const startArgs: string[] = [
@@ -52,8 +46,7 @@ export default class Dev extends Command {
       exec,
     ]
 
-    cleanJsFile(cwd)
-
+    const command = getCommand()
     const child = spawn(command, startArgs, { stdio: 'inherit' })
 
     child.on('close', (code) => {
@@ -62,5 +55,28 @@ export default class Dev extends Command {
         console.log('Error~')
       }
     })
+  }
+
+  async run() {
+    const { flags } = this.parse(Dev)
+    const cwd = process.cwd()
+    const { main, webpack = false } = flags
+    this.entry = main ? resolve(cwd, main) : appPath
+
+    cleanJsFile(cwd)
+
+    await Promise.all([
+      genControllers(),
+      genResolvers(),
+      genPluginsConfig(),
+      genConfig(),
+      genApp(),
+    ])
+
+    if (webpack) {
+      //
+    } else {
+      this.useTsNode()
+    }
   }
 }
