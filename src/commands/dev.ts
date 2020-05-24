@@ -5,6 +5,11 @@ import { join, resolve } from 'path'
 import { getCommand } from '../utils/getCommand'
 import { appPath } from '../utils/paths'
 import { cleanJsFile } from '../utils/cleanJsFile'
+import { genApp } from '../generators/app'
+import { genPluginsConfig } from '../generators/plugins'
+import { genConfig } from '../generators/config'
+import { genControllers } from '../generators/controllers'
+import { genResolvers } from '../generators/resolvers'
 
 export default class Dev extends Command {
   static description = 'Runs the app in development mode'
@@ -25,6 +30,14 @@ export default class Dev extends Command {
 
     const entry = serverPath ? resolve(cwd, serverPath) : appPath
 
+    await Promise.all([
+      genControllers(),
+      genResolvers(),
+      genPluginsConfig(),
+      genConfig(),
+      genApp(),
+    ])
+
     const exec = `ts-node ${tsconfigPathsString} --project ${tsconfigPath} ${entry}`
 
     // TODO: 需要完善
@@ -43,7 +56,7 @@ export default class Dev extends Command {
 
     const child = spawn(command, startArgs, { stdio: 'inherit' })
 
-    child.on('close', code => {
+    child.on('close', (code) => {
       if (code !== 0) {
         // TODO: handle ERROR
         console.log('Error~')
