@@ -2,7 +2,8 @@ import { Command, flags } from '@oclif/command'
 import spawn from 'cross-spawn'
 import { join, resolve } from 'path'
 
-import { getCommand } from '../utils/getCommand'
+import { getNodemon } from '../utils/getNodemon'
+import { getWebpack } from '../utils/getWebpack'
 import { appPath } from '../utils/paths'
 import { cleanJsFile } from '../utils/cleanJsFile'
 import { genApp } from '../generators/app'
@@ -30,8 +31,6 @@ export default class Dev extends Command {
     : ''
 
   private useTsNode() {
-    const cwd = process.cwd()
-
     const exec = `ts-node ${this.tsconfigPathsString} --project ${this.tsconfigPath} ${this.entry}`
 
     // TODO: 需要完善
@@ -46,8 +45,23 @@ export default class Dev extends Command {
       exec,
     ]
 
-    const command = getCommand()
-    const child = spawn(command, startArgs, { stdio: 'inherit' })
+    const nodemon = getNodemon()
+    const child = spawn(nodemon, startArgs, { stdio: 'inherit' })
+
+    child.on('close', (code) => {
+      if (code !== 0) {
+        // TODO: handle ERROR
+        console.log('Error~')
+      }
+    })
+  }
+
+  private useWebpack() {
+    const baseDir = join(__dirname, '..', '..')
+    const webpackConfigPath = join(baseDir, 'webpack.config.js')
+    const startArgs: string[] = ['--config', webpackConfigPath]
+    const webpack = getWebpack()
+    const child = spawn(webpack, startArgs, { stdio: 'inherit' })
 
     child.on('close', (code) => {
       if (code !== 0) {
@@ -74,7 +88,7 @@ export default class Dev extends Command {
     ])
 
     if (webpack) {
-      //
+      this.useWebpack()
     } else {
       this.useTsNode()
     }

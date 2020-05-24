@@ -1,5 +1,5 @@
 import { join } from 'path'
-import { Project, VariableDeclarationKind } from 'ts-morph'
+import { Project } from 'ts-morph'
 import saveSourceFile from '../utils/saveSourceFile'
 
 export async function genApp() {
@@ -10,11 +10,18 @@ export async function genApp() {
     overwrite: true,
   })
 
-  sourceFile.addStatements(`import { Application } from '@tiejs/core'
+  sourceFile.addStatements(`declare const module: any;
+import { Application } from '@tiejs/core'
 import { config } from './config'
 
 const app = new Application(config)
-app.bootstrap()`)
+app.bootstrap()
+
+if (module.hot) {
+  module.hot.accept();
+  module.hot.dispose(() => app.server && app.server.close());
+}
+`)
 
   await saveSourceFile(sourceFile)
 }

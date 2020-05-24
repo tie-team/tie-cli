@@ -1,7 +1,7 @@
 import { existsSync } from 'fs'
 import { join } from 'path'
 
-export function getCommand() {
+export function getNodemon() {
   const cwd = process.cwd()
   const baseDir = join(__dirname, '..', '..')
   const command = join(cwd, 'node_modules', '.bin', 'nodemon')

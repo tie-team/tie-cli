@@ -32,12 +32,15 @@
     "ora": "^4.0.4",
     "prettier": "^2.0.5",
     "reflect-metadata": "^0.1.13",
+    "tie-webpack-start-server": "0.0.2",
     "ts-jest": "^26.0.0",
     "ts-morph": "^7.1.0",
     "ts-node": "^8.10.1",
     "tsconfig-paths": "^3.9.0",
     "tslib": "^2.0.0",
     "typescript": "^3.9.2",
+    "webpack": "^4.43.0",
+    "webpack-node-externals": "^1.7.2",
     "yosay": "^2.0.2"
   },
   "devDependencies": {
@@ -65,7 +68,8 @@
     "/config",
     "/npm-shrinkwrap.json",
     "/oclif.manifest.json",
-    "/templates"
+    "/templates",
+    "webpack.config.js"
   ],
   "homepage": "https://github.com/tie-team/tie-cli",
   "keywords": [
