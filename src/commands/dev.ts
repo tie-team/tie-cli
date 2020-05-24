@@ -1,6 +1,7 @@
 import { Command, flags } from '@oclif/command'
 import spawn from 'cross-spawn'
 import { join, resolve } from 'path'
+import { removeSync, existsSync } from 'fs-extra'
 
 import { getNodemon } from '../utils/getNodemon'
 import { getWebpack } from '../utils/getWebpack'
@@ -77,6 +78,9 @@ export default class Dev extends Command {
     const { main, webpack = false } = flags
     this.entry = main ? resolve(cwd, main) : appPath
 
+    if (existsSync(join(cwd, 'generated'))) {
+      removeSync(join(cwd, 'generated'))
+    }
     cleanJsFile(cwd)
 
     await Promise.all([
