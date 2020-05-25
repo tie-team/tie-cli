@@ -3,7 +3,7 @@ import { Project } from 'ts-morph'
 import saveSourceFile from '../utils/saveSourceFile'
 
 export async function genPluginsConfig() {
-  const outPath = join(process.cwd(), 'generated', 'plugins.config.ts')
+  const outPath = join(process.cwd(), 'generated', 'tie.plugins.config.ts')
   const project = new Project()
 
   const sourceFile = project.createSourceFile(outPath, undefined, {
@@ -16,7 +16,7 @@ import View from '@tiejs/view'
 import Controller from '@tiejs/controller'
 import Graphql from '@tiejs/graphql'
 
-export const plugins: PluginConfig = [
+export const tiePlugins: PluginConfig = [
   {
     name: 'logger',
     main: Logger,

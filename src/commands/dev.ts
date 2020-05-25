@@ -87,9 +87,10 @@ export default class Dev extends Command {
       genControllers(),
       genResolvers(),
       genPluginsConfig(),
-      genConfig(),
       genApp(),
+      // genConfig(),
     ])
+    await genConfig()
 
     if (webpack) {
       this.useWebpack()

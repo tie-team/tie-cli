@@ -1,13 +1,14 @@
 import path from 'path'
 import { join } from 'path'
-import saveSourceFile from '../utils/saveSourceFile'
+import fs, { existsSync } from 'fs-extra'
 import globby, { GlobbyOptions } from 'globby'
 import { Project, VariableDeclarationKind } from 'ts-morph'
+import saveSourceFile from '../utils/saveSourceFile'
 
 const patterns = ['config/**/*.ts']
 const cwd = process.cwd()
 
-export function loadFiles() {
+export function loadConfigFiles() {
   let files: string[] = []
   for (const item of patterns) {
     let pattern: any
@@ -31,13 +32,29 @@ export async function genConfig() {
     overwrite: true,
   })
 
-  sourceFile.addStatements(`import { Config } from '@tiejs/common'
-import { plugins } from './plugins.config'
-import * as resolvers from './resolvers'
-import * as controllers from './controllers'
-`)
+  sourceFile.addImportDeclarations([
+    {
+      moduleSpecifier: '@tiejs/common',
+      namedImports: ['Config'],
+    },
+    {
+      moduleSpecifier: './tie.plugins.config',
+      namedImports: ['tiePlugins'],
+    },
+  ])
 
-  const modules = loadFiles()
+  const resolversPath = join(cwd, 'generated', 'resolvers.ts')
+  const controllersPath = join(cwd, 'generated', 'controllers.ts')
+
+  if (existsSync(resolversPath)) {
+    sourceFile.addStatements(`import * as resolvers from './resolvers'`)
+  }
+  if (existsSync(controllersPath)) {
+    sourceFile.addStatements(`import * as controllers from './controllers'`)
+  }
+
+  const modules = loadConfigFiles()
+
   sourceFile.addVariableStatement({
     declarationKind: VariableDeclarationKind.Const,
 
@@ -55,12 +72,21 @@ import * as controllers from './controllers'
     isExported: true,
   })
 
+  const initialResolvers = existsSync(resolversPath)
+    ? 'Object.values(resolvers)'
+    : '[]'
+  const initialControllers = existsSync(controllersPath)
+    ? 'Object.values(controllers)'
+    : '[]'
+
   sourceFile.addStatements(`
 export const config = modules.reduce(
   (result, cur) => {
     for (const key of Object.keys(cur)) {
       if (key === 'default') {
         result = { ...result, ...cur[key] }
+      } else if (key === 'plugins') {
+          result[key] = [...result.plugins, ...cur[key]] 
       } else {
         result[key] = cur[key]
       }
@@ -68,12 +94,11 @@ export const config = modules.reduce(
     return result
   },
   {
-    plugins,
-    resolvers: Object.values(resolvers),
-    controllers: Object.values(controllers),
+    plugins: tiePlugins,
+    resolvers: ${initialResolvers},
+    controllers: ${initialControllers},
   } as Config,
-)
-  `)
+)`)
 
   await saveSourceFile(sourceFile)
 }

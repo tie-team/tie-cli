@@ -43,5 +43,7 @@ export async function genControllers() {
     })
   }
 
-  await saveSourceFile(sourceFile)
+  if (files.length) {
+    await saveSourceFile(sourceFile)
+  }
 }
