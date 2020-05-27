@@ -19,8 +19,18 @@ export default class Dev extends Command {
   static examples = ['$ tie dev']
 
   static flags = {
-    webpack: flags.boolean({ char: 'w' }),
-    main: flags.string({ char: 'm' }),
+    webpack: flags.boolean({
+      char: 'w',
+      description: 'Use webpack ?',
+    }),
+    config: flags.string({
+      char: 'c',
+      description: 'Webpack config',
+    }),
+    main: flags.string({
+      char: 'm',
+      description: 'server main file',
+    }),
   }
 
   private cwd = process.cwd()
@@ -57,9 +67,11 @@ export default class Dev extends Command {
     })
   }
 
-  private useWebpack() {
+  private useWebpack(config: string = '') {
     const baseDir = join(__dirname, '..', '..')
-    const webpackConfigPath = join(baseDir, 'webpack.config.js')
+    const webpackConfigPath = config
+      ? resolve(this.cwd, config)
+      : join(baseDir, 'webpack.config.js')
     const startArgs: string[] = ['--config', webpackConfigPath]
     const webpack = getWebpack()
     const child = spawn(webpack, startArgs, { stdio: 'inherit' })
@@ -75,7 +87,7 @@ export default class Dev extends Command {
   async run() {
     const { flags } = this.parse(Dev)
     const cwd = process.cwd()
-    const { main, webpack = false } = flags
+    const { main, webpack = false, config } = flags
     this.entry = main ? resolve(cwd, main) : appPath
 
     // if (existsSync(join(cwd, 'generated'))) {
@@ -93,7 +105,7 @@ export default class Dev extends Command {
     await genConfig()
 
     if (webpack) {
-      this.useWebpack()
+      this.useWebpack(config)
     } else {
       this.useTsNode()
     }
