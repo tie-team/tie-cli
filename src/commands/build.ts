@@ -3,6 +3,12 @@ import { join } from 'path'
 import spawn from 'cross-spawn'
 import { existsSync } from 'fs'
 import ora from 'ora'
+import { cleanJsFile } from '../utils/cleanJsFile'
+import { genApp } from '../generators/app'
+import { genPluginsConfig } from '../generators/plugins'
+import { genConfig } from '../generators/config'
+import { genControllers } from '../generators/controllers'
+import { genResolvers } from '../generators/resolvers'
 
 function getCommand() {
   const cwd = process.cwd()
@@ -27,6 +33,15 @@ export default class Build extends Command {
     const startArgs: string[] = ['--project', tsconfigPath]
 
     const spinner = ora('Tie building...').start()
+
+    cleanJsFile(cwd)
+    await Promise.all([
+      genControllers(),
+      genResolvers(),
+      genPluginsConfig(),
+      genApp(),
+    ])
+    await genConfig()
 
     spawn.sync(command, startArgs, { stdio: 'inherit' })
     spinner.succeed('Tie build successfully')

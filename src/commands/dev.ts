@@ -93,6 +93,7 @@ export default class Dev extends Command {
     // if (existsSync(join(cwd, 'generated'))) {
     //   removeSync(join(cwd, 'generated'))
     // }
+
     cleanJsFile(cwd)
 
     await Promise.all([
@@ -100,7 +101,6 @@ export default class Dev extends Command {
       genResolvers(),
       genPluginsConfig(),
       genApp(),
-      // genConfig(),
     ])
     await genConfig()
 
