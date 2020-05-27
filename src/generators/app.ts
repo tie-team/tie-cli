@@ -14,7 +14,6 @@ export async function genApp() {
 import { Application } from '@tiejs/core'
 import { config } from './config'
 
-console.log('-----config:', config)
 const app = new Application(config)
 app.bootstrap()
 
