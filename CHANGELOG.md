@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://github.com/tie-team/tie-cli/compare/v0.1.5...v1.0.0) (2020-05-27)
+
+
+### Features
+
+* can custom webpack config ([88cd707](https://github.com/tie-team/tie-cli/commit/88cd707410e0529964c26fb0ea8f3fbd6ca2468c))
+* improve  generators ([ecca2bc](https://github.com/tie-team/tie-cli/commit/ecca2bc74cb15cc40fdf418c038e3be16f9a0825))
+* improve templates ([079dfc4](https://github.com/tie-team/tie-cli/commit/079dfc4f92533b95c9f9506c9e11d677425ffef4))
+* rm generated when tie dev ([fa9ab63](https://github.com/tie-team/tie-cli/commit/fa9ab636274a3133ef1a4cb1a06f0eff5cb55b75))
+* support generators ([59a4575](https://github.com/tie-team/tie-cli/commit/59a4575d46deeb4e691ba75c1fc1895240ea67e2))
+* support webpack ([06199a0](https://github.com/tie-team/tie-cli/commit/06199a09f9e923d3982822fb3f07ea465c508d86))
+
+
+### Bug Fixes
+
+* can not rm /generated ([fa7f91a](https://github.com/tie-team/tie-cli/commit/fa7f91ad9f1aeb0e51e5ee284ee4966ad0577d63))
+
 ### [0.1.5](https://github.com/tie-team/tie-cli/compare/v0.1.4...v0.1.5) (2020-05-21)
 
 
