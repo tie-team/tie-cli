@@ -8,7 +8,6 @@ import { getWebpack } from '../utils/getWebpack'
 import { appPath } from '../utils/paths'
 import { cleanJsFile } from '../utils/cleanJsFile'
 import { genApp } from '../generators/app'
-import { genPluginsConfig } from '../generators/plugins'
 import { genConfig } from '../generators/config'
 import { genControllers } from '../generators/controllers'
 import { genResolvers } from '../generators/resolvers'
@@ -90,16 +89,11 @@ export default class Dev extends Command {
     const { main, webpack = false, config } = flags
     this.entry = main ? resolve(cwd, main) : appPath
 
-    // if (existsSync(join(cwd, 'generated'))) {
-    //   removeSync(join(cwd, 'generated'))
-    // }
-
     cleanJsFile(cwd)
 
     await Promise.all([
       genControllers(),
       genResolvers(),
-      genPluginsConfig(),
       genApp(),
     ])
     await genConfig()

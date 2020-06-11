@@ -37,10 +37,6 @@ export async function genConfig() {
       moduleSpecifier: '@tiejs/common',
       namedImports: ['Config'],
     },
-    {
-      moduleSpecifier: './tie.plugins.config',
-      namedImports: ['tiePlugins'],
-    },
   ])
 
   const resolversPath = join(cwd, 'generated', 'resolvers.ts')
@@ -94,7 +90,7 @@ export const config = modules.reduce(
     return result
   },
   {
-    plugins: tiePlugins,
+    plugins: [],
     resolvers: ${initialResolvers},
     controllers: ${initialControllers},
   } as Config,
