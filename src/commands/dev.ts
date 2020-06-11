@@ -1,8 +1,6 @@
 import { Command, flags } from '@oclif/command'
 import spawn from 'cross-spawn'
 import { join, resolve } from 'path'
-// import { removeSync, existsSync } from 'fs-extra'
-
 import { getNodemon } from '../utils/getNodemon'
 import { getWebpack } from '../utils/getWebpack'
 import { appPath } from '../utils/paths'
@@ -11,6 +9,7 @@ import { genApp } from '../generators/app'
 import { genConfig } from '../generators/config'
 import { genControllers } from '../generators/controllers'
 import { genResolvers } from '../generators/resolvers'
+import { genSchedules } from '../generators/schedules'
 
 export default class Dev extends Command {
   static description = 'Runs the app in development mode'
@@ -94,6 +93,7 @@ export default class Dev extends Command {
     await Promise.all([
       genControllers(),
       genResolvers(),
+      genSchedules(),
       genApp(),
     ])
     await genConfig()

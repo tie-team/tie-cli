@@ -41,12 +41,16 @@ export async function genConfig() {
 
   const resolversPath = join(cwd, 'generated', 'resolvers.ts')
   const controllersPath = join(cwd, 'generated', 'controllers.ts')
+  const schedulesPath = join(cwd, 'generated', 'schedules.ts')
 
   if (existsSync(resolversPath)) {
     sourceFile.addStatements(`import * as resolvers from './resolvers'`)
   }
   if (existsSync(controllersPath)) {
     sourceFile.addStatements(`import * as controllers from './controllers'`)
+  }
+  if (existsSync(schedulesPath)) {
+    sourceFile.addStatements(`import * as schedules from './schedules'`)
   }
 
   const modules = loadConfigFiles()
@@ -74,6 +78,9 @@ export async function genConfig() {
   const initialControllers = existsSync(controllersPath)
     ? 'Object.values(controllers)'
     : '[]'
+  const initialSchedules = existsSync(schedulesPath)
+    ? 'Object.values(schedules)'
+    : '[]'
 
   sourceFile.addStatements(`
 export const config = modules.reduce(
@@ -82,7 +89,7 @@ export const config = modules.reduce(
       if (key === 'default') {
         result = { ...result, ...cur[key] }
       } else if (key === 'plugins') {
-          result[key] = [...result.plugins, ...cur[key]] 
+        result[key] = [...result.plugins, ...cur[key]] 
       } else {
         result[key] = cur[key]
       }
@@ -94,7 +101,16 @@ export const config = modules.reduce(
     resolvers: ${initialResolvers},
     controllers: ${initialControllers},
   } as Config,
-)`)
+)
+
+  // set modules config
+  if(config.schedule) {
+    config.schedule.schedules = ${initialSchedules}
+  } else {
+    config.schedule = { schedules: ${initialSchedules} }
+  }
+
+`)
 
   await saveSourceFile(sourceFile)
 }
