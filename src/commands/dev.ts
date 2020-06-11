@@ -10,6 +10,7 @@ import { genConfig } from '../generators/config'
 import { genControllers } from '../generators/controllers'
 import { genResolvers } from '../generators/resolvers'
 import { genSchedules } from '../generators/schedules'
+import { genEvents } from '../generators/events'
 
 export default class Dev extends Command {
   static description = 'Runs the app in development mode'
@@ -94,6 +95,7 @@ export default class Dev extends Command {
       genControllers(),
       genResolvers(),
       genSchedules(),
+      genEvents(),
       genApp(),
     ])
     await genConfig()
