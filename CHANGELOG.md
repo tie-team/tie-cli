@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/tie-team/tie-cli/compare/v1.0.1...v1.1.0) (2020-06-12)
+
+
+### Features
+
+* improve genConfig ([6c1ad2d](https://github.com/tie-team/tie-cli/commit/6c1ad2ddaf5c53d0a28c890a946936b0ca2f347a))
+* support event config ([f77170a](https://github.com/tie-team/tie-cli/commit/f77170a9df4fb2edd3703fb0fa8948ccc7da321f))
+* support schedules config ([49381a2](https://github.com/tie-team/tie-cli/commit/49381a242ea78a0f6147cf653cdc65df06649696))
+
+
+### Bug Fixes
+
+* fix tie build ([d2f9f3e](https://github.com/tie-team/tie-cli/commit/d2f9f3efa534de291751d88791550da12dbd405c))
+
 ### [1.0.1](https://github.com/tie-team/tie-cli/compare/v1.0.0...v1.0.1) (2020-05-27)
 
 
