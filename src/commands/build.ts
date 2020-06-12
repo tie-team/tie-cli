@@ -5,10 +5,11 @@ import { existsSync } from 'fs'
 import ora from 'ora'
 import { cleanJsFile } from '../utils/cleanJsFile'
 import { genApp } from '../generators/app'
-import { genPluginsConfig } from '../generators/plugins'
 import { genConfig } from '../generators/config'
 import { genControllers } from '../generators/controllers'
 import { genResolvers } from '../generators/resolvers'
+import { genSchedules } from '../generators/schedules'
+import { genEvents } from '../generators/events'
 
 function getCommand() {
   const cwd = process.cwd()
@@ -38,7 +39,8 @@ export default class Build extends Command {
     await Promise.all([
       genControllers(),
       genResolvers(),
-      genPluginsConfig(),
+      genSchedules(),
+      genEvents(),
       genApp(),
     ])
     await genConfig()
