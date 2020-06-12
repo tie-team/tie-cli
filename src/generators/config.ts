@@ -37,6 +37,10 @@ export async function genConfig() {
       moduleSpecifier: '@tiejs/common',
       namedImports: ['Config'],
     },
+    {
+      moduleSpecifier: 'lodash.set',
+      defaultImport: 'set',
+    },
   ])
 
   const resolversPath = join(cwd, 'generated', 'resolvers.ts')
@@ -52,6 +56,10 @@ export async function genConfig() {
   }
   if (existsSync(eventsPath)) {
     sourceFile.addStatements(`import * as events from './events'`)
+  }
+
+  if (existsSync(schedulesPath)) {
+    sourceFile.addStatements(`import * as schedules from './schedules'`)
   }
 
   const modules = loadConfigFiles()
@@ -101,25 +109,13 @@ export const config = modules.reduce(
   },
   {
     plugins: [],
-    resolvers: ${initialResolvers},
-    controllers: ${initialControllers},
   } as Config,
 )
 
-  // set modules config
-  if(config.schedule) {
-    config.schedule.schedules = ${initialSchedules}
-  } else {
-    config.schedule = { schedules: ${initialSchedules} }
-  }
-
-  // set events config
-  if(config.event) {
-    config.event.events = ${initialEvents}
-  } else {
-    config.event = { events: ${initialEvents} }
-  }
-
+set(config, 'controller.controllers', ${initialControllers})
+set(config, 'graphql.resolvers', ${initialResolvers})
+set(config, 'schedule.schedules', ${initialSchedules})
+set(config, 'event.events', ${initialEvents})
 `)
 
   await saveSourceFile(sourceFile)
