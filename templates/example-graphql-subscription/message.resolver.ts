@@ -1,4 +1,5 @@
 import { PubSubEngine } from 'graphql-subscriptions'
+import { Injectable } from '@tiejs/common'
 import {
   Resolver,
   Query,
@@ -11,6 +12,7 @@ import {
   Field,
 } from 'type-graphql'
 
+@Injectable()
 @ObjectType()
 export class Message {
   @Field()
@@ -48,11 +50,10 @@ export class SampleResolver {
   }
 
   @Subscription({ topics: 'MESSAGE_COMING' })
-  messageSubscription(@Root()
-  {
-    id,
-    content,
-  }: MessagePayload): Message {
+  messageSubscription(
+    @Root()
+    { id, content }: MessagePayload,
+  ): Message {
     return { id, content, date: new Date() }
   }
 }
