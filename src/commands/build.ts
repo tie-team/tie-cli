@@ -1,4 +1,3 @@
-import StyliTypes,  from '@styli/types'
 import { Command } from '@oclif/command'
 import { join } from 'path'
 import spawn from 'cross-spawn'
@@ -11,13 +10,6 @@ import { genControllers } from '../generators/controllers'
 import { genResolvers } from '../generators/resolvers'
 import { genSchedules } from '../generators/schedules'
 import { genEvents } from '../generators/events'
-
-
-
-
-
-
-
 
 function getCommand() {
   const cwd = process.cwd()
